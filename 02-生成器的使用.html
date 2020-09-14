@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,maximum=1.0,minimum=1.0">
+  <title>Title</title>
+</head>
+<body>
+<button id="btn">按钮</button>
+<script>
+
+  var  body = document.body;
+  function * gen(){
+    console.log("111111111");
+    yield "a";
+    console.log("222222222");
+    yield "b";
+    console.log("33333333333");
+    yield "c";
+    console.log("4444444444");
+    yield "d";
+  }
+  let iterator = gen();  //返回值实际上就是一个迭代器的接口
+  // console.log(iterator);
+  // console.log(iterator.next());
+  // console.log(iterator.next());
+  // console.log(iterator.next());
+  // console.log(iterator.next());
+  // console.log(iterator.next());
+
+
+  function * ranColor(){
+    body.style.backgroundColor = "red";
+    yield
+    body.style.backgroundColor = "green";
+    yield
+    body.style.backgroundColor = "blue";
+    yield
+  }
+  var  r = ranColor();
+  btn.onclick = function(){
+    r.next();
+  }
+
+
+  //
+  // setTimeout(()=>{
+  //   console.log("11111")
+  //   setTimeout(()=>{
+  //     console.log("222222222");
+  //     setTimeout(()=>{
+  //       console.log("33333");
+  //       setTimeout(()=>{
+  //         console.log("4444");
+  //         setTimeout(()=>{
+  //           console.log("5555");
+  //           setTimeout(()=>{
+  //             console.log("6666");
+  //           },3000)
+  //         },3000)
+  //       },3000)
+  //     },3000)
+  //   },2000)
+  // },1000)
+
+
+  function one (){
+    setTimeout(()=>{
+      console.log("1111");
+      iterator1.next();
+    },1000)
+  }
+  function two(){
+    setTimeout(()=>{
+      console.log("2222");
+      iterator1.next();
+    },2000)
+  }
+  function three(){
+    setTimeout(()=>{
+      console.log("333");
+      iterator1.next();
+    },2000)
+  }
+  function four(){
+    setTimeout(()=>{
+      console.log("4444");
+      iterator1.next();
+    },2000)
+  }
+  function five(){
+    setTimeout(()=>{
+      console.log("5555");
+      iterator1.next();
+    },2000)
+  }
+
+  function * timer(){
+    yield one();
+    yield two();
+    yield three();
+    yield four();
+    yield five();
+  }
+  let iterator1 = timer();
+  iterator1.next();
+
+</script>
+</body>
+</html>

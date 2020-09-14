@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,maximum=1.0,minimum=1.0">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  let xiyouji = ["唐僧","悟空","八戒","沙僧"];
+
+  //for...of
+  for(let item  of xiyouji){
+    console.log(item);
+  }
+
+  // let iterator = xiyouji[Symbol.iterator]();
+  //
+  // console.log(iterator);
+  // console.log(iterator.next());
+  // console.log(iterator.next());
+  // console.log(iterator.next());
+  // console.log(iterator.next());
+  // console.log(iterator.next());
+
+  let  obj = {
+    name:"张三",
+    cunzhe:[
+        3000,
+        10000,
+        100000,
+        10
+    ],
+    [Symbol.iterator](){
+      let index = 0;
+      return {
+        next:()=>{
+          // return {value:'1111',done:false};
+          if(index < this.cunzhe.length){
+            let r =  {value:this.cunzhe[index],done:false};
+            index++;
+            return  r;
+          }else{
+            return {value:undefined,done:true}
+          }
+        }
+      };
+    }
+  }
+  for(let item  of  obj){
+    console.log(item);
+  }
+</script>
+</body>
+</html>

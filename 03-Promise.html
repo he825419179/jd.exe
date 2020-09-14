@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,maximum=1.0,minimum=1.0">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  let  body = document.body;
+  // let xml = new XMLHttpRequest();
+  // xml.open("GET","./data.json");
+  // xml.send();
+  // xml.onreadystatechange = function(){
+  //   if(xml.readyState==4){
+  //     if(xml.status>=200 && xml.status<300){
+  //       let data = JSON.parse(xml.response);
+  //       let uls = document.createElement("ul");
+  //       for(let i=0;i<data.jiadian.length;i++){
+  //         let lis = document.createElement("li");
+  //         lis.innerText = data.jiadian[i].name;
+  //         uls.appendChild(lis);
+  //       }
+  //       body.appendChild(uls);
+  //       let liss = document.querySelectorAll(" ul>li");
+  //       for(let i=0;i<liss.length;i++){
+  //         liss[i].onclick = function(){
+  //           let ols = document.createElement("ol");
+  //           let data1 = data.jiadian[i].brand;
+  //           for(let j=0;i<data1.length;j++){
+  //               let lis = document.createElement("li");
+  //               lis.innerText = data1[j].name;
+  //               ols.appendChild(lis);
+  //               liss[i].appendChild(ols);
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
+
+  //实例化一个Promise对象
+  let p = new Promise((resolve,reject)=>{
+    //resolve()  表示成功时回调
+    // reject() 表示失败时回调
+    let xml = new XMLHttpRequest();
+    xml.open("GET","./data.json");
+    xml.send();
+    xml.onreadystatechange = function(){
+      if(xml.readyState==4){
+        if(xml.status>=200 && xml.status<300){
+          resolve(xml.response);
+        }else{
+          reject("请求失败")
+        }
+      }
+    }
+  })
+   .then( value =>{
+    let data = JSON.parse(value);
+    let uls = document.createElement("ul");
+    for(let i=0;i<data.jiadian.length;i++){
+      let lis = document.createElement("li");
+      lis.innerText = data.jiadian[i].name;
+      uls.appendChild(lis);
+    }
+    body.appendChild(uls);
+    let liss = document.querySelectorAll(" ul>li");
+    for(let i=0;i<liss.length;i++){
+      liss[i].onclick = function(){
+        let ols = document.createElement("ol");
+        let data1 = data.jiadian[i].brand;
+        for(let j=0;i<data1.length;j++){
+          let lis = document.createElement("li");
+          lis.innerText = data1[j].name;
+          ols.appendChild(lis);
+          liss[i].appendChild(ols);
+        }
+      }
+    }
+  return new Promise((resolve, reject)=>{
+    let xml = new XMLHttpRequest();
+    xml.open('get','./笔记.txt')
+    xml.send();
+    xml.onreadystatechange = function(){
+      if(xml.readyState==4&&xml.status==200){
+        resolve(xml.response)
+      }
+    }
+  })
+  },err=>{})
+   .then((value)=>{
+    console.log(value);
+    return new Promise((resolve, reject)=>{
+      resolve("11111")
+    })
+  })
+   .then(value=>{
+      console.log(value);
+   })
+
+
+</script>
+</body>
+</html>
